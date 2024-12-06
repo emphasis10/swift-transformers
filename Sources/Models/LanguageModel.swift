@@ -16,8 +16,11 @@ public class LanguageModel {
     public let minContextLength: Int
     public let maxContextLength: Int
     
-    let input_ids = "input_ids"
-    let attention_mask = "attention_mask"
+    // let input_ids = "input_ids"
+    // let attention_mask = "attention_mask"
+
+    let input_ids = "inputIds"
+    let attention_mask = "causalMask"
     
     struct Configurations {
         var modelConfig: Config
@@ -33,7 +36,7 @@ public class LanguageModel {
         
         // We assume inputs named "input_ids" with shape (1, seq_length)
         // Perhaps we should convert to vectors of shape (seq_length) and use sequenceConstraint instead of shapeConstraint
-        let inputDescription = model.modelDescription.inputDescriptionsByName["input_ids"]
+        let inputDescription = model.modelDescription.inputDescriptionsByName["inputIds"]
         
         guard let shapeConstraint = inputDescription?.multiArrayConstraint?.shapeConstraint else {
             fatalError("Cannot obtain shape information")
